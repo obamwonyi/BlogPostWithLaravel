@@ -19,6 +19,7 @@ class User extends Authenticatable
      */
     protected $fillable = [
         'name',
+        'username',
         'email',
         'password',
     ];
@@ -43,6 +44,14 @@ class User extends Authenticatable
     ];
 
 
+
+    //this will function as an eloquent mutator
+    //please note the convention for creating an eloquent 
+    //mutator is setNameAttribute
+    public function setPasswordAttribute($password)
+    {
+        $this->attributes['password'] = bcrypt($password); 
+    }
 
     public function post() 
     {
